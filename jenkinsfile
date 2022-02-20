@@ -6,10 +6,8 @@ pipeline {
     }
 
     environment {
-        DOCKER_PATH = credentials('DOCKER_HUB_USER_PATH')
         DOCKER_AUTH = credentials('DOCKER_HUB_AUTH')
-
-        DOCKER_IMAGE_NAME = 'spring_docker_test'
+        DOCKER_IMAGE_NAME = 'spring_docker_jenkins'
     }
     stages {
         stage('Build') {
@@ -24,7 +22,7 @@ pipeline {
         }
         stage('Build Docker image') {
             steps {
-                bat 'mvn spring-boot:build-image -Dspring-boot.build-image.imageName=%DOCKER_PATH%/%DOCKER_IMAGE_NAME%'
+                bat 'mvn spring-boot:build-image -Dspring-boot.build-image.imageName=%DOCKER_AUTH_USR%/%DOCKER_IMAGE_NAME%'
             }
         }
         stage('Push Docker image') {
