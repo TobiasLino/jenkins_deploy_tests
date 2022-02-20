@@ -24,12 +24,12 @@ pipeline {
         }
         stage('Build Docker image') {
             steps {
-                bat 'mvn spring-boot:build-image -Dspring-boot.build-image.imageName=$DOCKER_PATH/$DOCKER_IMAGE_NAME'
+                bat 'mvn spring-boot:build-image -Dspring-boot.build-image.imageName=$(DOCKER_PATH)/$(DOCKER_IMAGE_NAME)'
             }
         }
         stage('Push Docker image') {
             steps {
-                bat 'docker login --username=$DOCKER_AUTH_USR --password$DOCKER_AUTH_PSW'
+                bat 'docker login --username=$(DOCKER_AUTH_USR) --password=$(DOCKER_AUTH_PSW)'
                 bat 'docker push $DOCKER_PATH/$DOCKER_IMAGE_NAME'
             }
         }
