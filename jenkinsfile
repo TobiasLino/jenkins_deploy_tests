@@ -27,8 +27,9 @@ pipeline {
         }
         stage('Push Docker image') {
             steps {
+                bat 'docker logout'
                 bat 'docker login --username=%DOCKER_AUTH_USR% --password=%DOCKER_AUTH_PSW%'
-                bat 'docker push %DOCKER_PATH%/%DOCKER_IMAGE_NAME%'
+                bat 'docker push %DOCKER_AUTH_USR%/%DOCKER_IMAGE_NAME%'
             }
         }
     }
