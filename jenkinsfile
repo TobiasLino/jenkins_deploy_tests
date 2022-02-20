@@ -11,8 +11,8 @@ pipeline {
             }
         }
         stage('Tests') {
-        steps {
-            bat 'mvn clean test'
-        }
+            steps {
+                bat 'mvn clean test'
+            }
     }
 }
